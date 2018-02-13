@@ -2,6 +2,10 @@ variable "depends_id" {
   default = ""
 }
 
+variable "deploy" {
+  default = true
+}
+
 variable "name" {}
 variable "image" {}
 

@@ -184,4 +184,8 @@ ${var.stop_timeout == "" ? "" : "--stop-timeout ${var.stop_timeout}"} \
 ${var.name}
 EOF
   }
+
+  provisioner "local-exec" {
+    command = "[ ${var.deploy} = 1 ] && kontena service deploy ${var.name}"
+  }
 }
