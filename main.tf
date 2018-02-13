@@ -32,8 +32,8 @@ resource "null_resource" "kontena_service" {
   provisioner "local-exec" {
     command = <<EOF
 kontena service create \
-${var.read_only == "" ? "" : "--read-only"} \
-${var.stateful == "" ? "" : "--stateful"} \
+${var.read_only == true ? "--read-only" : ""} \
+${var.stateful == true ? "--stateful" : ""} \
 ${local.volumes_or_none} \
 ${local.volume_froms_or_none} \
 ${var.name} ${var.image}
