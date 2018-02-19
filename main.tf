@@ -145,10 +145,9 @@ resource "null_resource" "kontena_service_update" {
     stop_timeout               = "${var.stop_timeout}"
   }
 
-  # needs to add --no-wait -> https://github.com/kontena/kontena/issues/3289
   provisioner "local-exec" {
     command = <<EOF
-kontena service update --no-wait \
+kontena service update \
 ${var.image == "" ? "" : "--image ${var.image}"} \
 ${local.ports_or_none} \
 ${local.envs_or_none} \
@@ -186,7 +185,8 @@ ${var.name}
 EOF
   }
 
+  # needs to add --no-wait -> https://github.com/kontena/kontena/issues/3289
   provisioner "local-exec" {
-    command = "[ ${var.deploy} = 1 ] && kontena service deploy ${var.name}"
+    command = "[ ${var.deploy} = 1 ] && kontena service deploy --no-wait ${var.name}"
   }
 }
